@@ -44,7 +44,7 @@ with open(filename) as fd:
   for row in data:
 
     # Create a node for our movie
-    movie_node = n[row['tconst']] # Unique URI
+    movie_node = n['Movie/' + row['tconst']] # Unique URI
     class_node = n['Movie']
     g.add((movie_node, n.hasOriginalTitle, Literal(row['originalTitle'])))
     g.add((movie_node, n.hasAdultContent, Literal(row['isAdult'],  datatype=XSD.boolean)))
@@ -80,7 +80,7 @@ with open(filename) as fd:
 
     progress.count()
     if progress.finished():
-      break;
+      break
 
 
 print(len(genres_set))
