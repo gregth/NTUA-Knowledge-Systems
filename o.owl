@@ -400,6 +400,16 @@
     
 
 
+    <!-- http://www.ourmoviedb.org/hasAvgRating -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ourmoviedb.org/hasAvgRating">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.ourmoviedb.org/Movie"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://www.ourmoviedb.org/hasGenreName -->
 
     <owl:DatatypeProperty rdf:about="http://www.ourmoviedb.org/hasGenreName">
@@ -481,6 +491,16 @@
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
         <rdfs:domain rdf:resource="http://www.ourmoviedb.org/Movie"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ourmoviedb.org/votesNumber -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ourmoviedb.org/votesNumber">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.ourmoviedb.org/Movie"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
     </owl:DatatypeProperty>
     
 
