@@ -16,7 +16,6 @@ def is_specified(val):
 identifier = 'ratingsGraph'
 uri_base = 'http://www.ourmoviedb.org/'
 filename = 'data/title.ratings.tsv'
-output = 'outs/' + identifier + '.ttl.n3'
 delete_existing_persistent_graph=True
 
 # Create graph
@@ -31,7 +30,8 @@ n = Namespace(uri_base)
 
 # Count lines
 total_entries = num_lines = sum(1 for line in open(filename))
-total_entries = round(total_entries/200) # Test
+total_entries = round(total_entries/100) # Test
+output = 'outs/' + identifier + str(total_entries) + '.ttl.n3'
 
 progress = Progress(total_entries)
 start = time.time()
