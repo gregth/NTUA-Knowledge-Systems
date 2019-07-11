@@ -16,7 +16,6 @@ def is_specified(val):
 identifier = 'moviesGraph'
 uri_base = 'http://www.ourmoviedb.org/'
 filename = 'data/title.basics.tsv'
-output = 'outs/' + identifier + '.ttl.n3'
 delete_existing_persistent_graph=True
 
 # Create graph
@@ -32,7 +31,9 @@ genre_namespace = Namespace(uri_base + 'Genre/')
 
 # Count lines
 total_entries = num_lines = sum(1 for line in open(filename))
-total_entries =  10 #round(total_entries/1000) # Test
+total_entries = round(total_entries/100) # Test
+output = 'outs/' + identifier + str(total_entries) + '.ttl.n3'
+
 
 progress = Progress(total_entries)
 start = time.time()
@@ -51,12 +52,12 @@ with open(filename) as fd:
     g.add((movie_node, RDF.type, class_node)) 
 
     if is_specified(row['startYear']):
-      start_year_node = n['data/year' + row['startYear']]
+      start_year_node = n['Year/' + row['startYear']]
       g.add((movie_node, n.hasStartYear, start_year_node)) 
 
     # Check if endYear exist
     if is_specified(row['endYear']):
-      end_year_node = n['data/year' + row['endYear']]
+      end_year_node = n['Year/' + row['endYear']]
       g.add((movie_node, n.hasEndYear, end_year_node)) 
 
     if is_specified(row['runtimeMinutes']):

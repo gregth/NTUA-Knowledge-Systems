@@ -16,7 +16,6 @@ def is_specified(val):
 identifier = 'peopleGraph'
 uri_base = 'http://www.ourmoviedb.org/'
 filename = 'data/name.basics.tsv'
-output = 'outs/' + identifier + '.ttl.n3'
 delete_existing_persistent_graph=True
 
 # Create graph
@@ -31,14 +30,15 @@ n = Namespace(uri_base)
 
 # Count lines
 total_entries = num_lines = sum(1 for line in open(filename))
-total_entries =  10 #round(total_entries/1000) # Test
+total_entries =  round(total_entries/100) # Test
+output = 'outs/' + identifier + str(total_entries) + '.ttl.n3'
+
 
 progress = Progress(total_entries)
 start = time.time()
 
 
 with open(filename) as fd:
-  genres_set = set()
   data = csv.DictReader(fd, delimiter="\t", quotechar='"', escapechar='')
   for row in data:
 
@@ -49,11 +49,11 @@ with open(filename) as fd:
     g.add((person_node, RDF.type, class_node)) 
 
     if is_specified(row['birthYear']):
-      birth_year_node = n['data/year' + row['birthYear']]
+      birth_year_node = n['Year/' + row['birthYear']]
       g.add((person_node, n.hasBirthYear, birth_year_node)) 
 
     if is_specified(row['deathYear']):
-      death_year_node = n['data/year' + row['deathYear']]
+      death_year_node = n['Year/' + row['deathYear']]
       g.add((person_node, n.hasDeathYear, death_year_node)) 
 
     # Write down the primary professions specified in the database
