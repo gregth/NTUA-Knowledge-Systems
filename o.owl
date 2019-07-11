@@ -17,6 +17,23 @@
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.w3.org/2001/XMLSchema#gYear -->
+
+    <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#gYear"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
     // Object Properties
     //
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -501,6 +518,16 @@
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
         <rdfs:domain rdf:resource="http://www.ourmoviedb.org/Movie"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ourmoviedb.org/yearValue -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ourmoviedb.org/yearValue">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.ourmoviedb.org/Year"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#gYear"/>
     </owl:DatatypeProperty>
     
 
@@ -1135,14 +1162,6 @@
     
 
 
-    <!-- http://www.ourmoviedb.org/Unknown -->
-
-    <owl:Class rdf:about="http://www.ourmoviedb.org/Unknown">
-        <rdfs:subClassOf rdf:resource="http://www.ourmoviedb.org/Year"/>
-    </owl:Class>
-    
-
-
     <!-- http://www.ourmoviedb.org/War -->
 
     <owl:Class rdf:about="http://www.ourmoviedb.org/War">
@@ -1192,45 +1211,53 @@
 
     <!-- http://www.ourmoviedb.org/Year -->
 
-    <owl:Class rdf:about="http://www.ourmoviedb.org/Year">
-        <owl:disjointUnionOf rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.ourmoviedb.org/Unknown"/>
-            <rdf:Description rdf:about="http://www.ourmoviedb.org/00s"/>
-            <rdf:Description rdf:about="http://www.ourmoviedb.org/10s"/>
-            <rdf:Description rdf:about="http://www.ourmoviedb.org/80s"/>
-            <rdf:Description rdf:about="http://www.ourmoviedb.org/90s"/>
-        </owl:disjointUnionOf>
-    </owl:Class>
+    <owl:Class rdf:about="http://www.ourmoviedb.org/Year"/>
     
 
 
-    <!-- http://www.ourmoviedb.org/00s -->
+    <!-- http://www.ourmoviedb.org/Year/00s -->
 
-    <owl:Class rdf:about="http://www.ourmoviedb.org/00s">
+    <owl:Class rdf:about="http://www.ourmoviedb.org/Year/00s">
         <rdfs:subClassOf rdf:resource="http://www.ourmoviedb.org/Year"/>
     </owl:Class>
     
 
 
-    <!-- http://www.ourmoviedb.org/10s -->
+    <!-- http://www.ourmoviedb.org/Year/50s -->
 
-    <owl:Class rdf:about="http://www.ourmoviedb.org/10s">
+    <owl:Class rdf:about="http://www.ourmoviedb.org/Year/50s">
         <rdfs:subClassOf rdf:resource="http://www.ourmoviedb.org/Year"/>
     </owl:Class>
     
 
 
-    <!-- http://www.ourmoviedb.org/80s -->
+    <!-- http://www.ourmoviedb.org/Year/60s -->
 
-    <owl:Class rdf:about="http://www.ourmoviedb.org/80s">
+    <owl:Class rdf:about="http://www.ourmoviedb.org/Year/60s">
         <rdfs:subClassOf rdf:resource="http://www.ourmoviedb.org/Year"/>
     </owl:Class>
     
 
 
-    <!-- http://www.ourmoviedb.org/90s -->
+    <!-- http://www.ourmoviedb.org/Year/70s -->
 
-    <owl:Class rdf:about="http://www.ourmoviedb.org/90s">
+    <owl:Class rdf:about="http://www.ourmoviedb.org/Year/70s">
+        <rdfs:subClassOf rdf:resource="http://www.ourmoviedb.org/Year"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ourmoviedb.org/Year/80s -->
+
+    <owl:Class rdf:about="http://www.ourmoviedb.org/Year/80s">
+        <rdfs:subClassOf rdf:resource="http://www.ourmoviedb.org/Year"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ourmoviedb.org/Year/90s -->
+
+    <owl:Class rdf:about="http://www.ourmoviedb.org/Year/90s">
         <rdfs:subClassOf rdf:resource="http://www.ourmoviedb.org/Year"/>
     </owl:Class>
     
@@ -1847,265 +1874,199 @@
 
     <!-- http://www.ourmoviedb.org/data/year_0 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_0">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/Unknown"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_0"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_1982 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1982">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/80s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1982"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_1987 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1987">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/80s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1987"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_1988 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1988">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/80s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1988"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_1989 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1989">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/80s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1989"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_1990 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1990">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/90s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1990"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_1991 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1991">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/90s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1991"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_1992 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1992">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/90s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1992"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_1993 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1993">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/90s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1993"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_1994 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1994">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/90s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1994"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_1995 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1995">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/90s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1995"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_1996 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1996">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/90s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1996"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_1997 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1997">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/90s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1997"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_1998 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1998">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/90s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1998"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_1999 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1999">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/90s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_1999"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_2000 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2000">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/00s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2000"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_2001 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2001">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/00s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2001"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_2002 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2002">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/00s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2002"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_2003 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2003">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/00s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2003"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_2004 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2004">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/00s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2004"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_2005 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2005">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/00s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2005"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_2006 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2006">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/00s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2006"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_2007 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2007">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/00s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2007"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_2008 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2008">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/00s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2008"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_2009 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2009">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/00s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2009"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_2010 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2010">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/10s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2010"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_2011 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2011">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/10s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2011"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_2012 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2012">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/10s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2012"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_2013 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2013">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/10s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2013"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_2014 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2014">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/10s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2014"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_2015 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2015">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/10s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2015"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_2016 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2016">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/10s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2016"/>
     
 
 
     <!-- http://www.ourmoviedb.org/data/year_2017 -->
 
-    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2017">
-        <rdf:type rdf:resource="http://www.ourmoviedb.org/10s"/>
-    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.ourmoviedb.org/data/year_2017"/>
     
 
 
@@ -2125,6 +2086,17 @@
             <rdf:Description rdf:about="http://www.ourmoviedb.org/Asia"/>
             <rdf:Description rdf:about="http://www.ourmoviedb.org/Europe"/>
             <rdf:Description rdf:about="http://www.ourmoviedb.org/Oceania"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.ourmoviedb.org/Year/00s"/>
+            <rdf:Description rdf:about="http://www.ourmoviedb.org/Year/50s"/>
+            <rdf:Description rdf:about="http://www.ourmoviedb.org/Year/60s"/>
+            <rdf:Description rdf:about="http://www.ourmoviedb.org/Year/70s"/>
+            <rdf:Description rdf:about="http://www.ourmoviedb.org/Year/80s"/>
+            <rdf:Description rdf:about="http://www.ourmoviedb.org/Year/90s"/>
         </owl:members>
     </rdf:Description>
     <rdf:Description>
