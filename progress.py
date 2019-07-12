@@ -21,6 +21,7 @@ class Progress:
     self.pbar.update(1)
     if self.finished():
       self.current_batch += 1 # Create the last batch
+      self.bbar.update(1)
       self.pbar.close()
       self.bbar.close()
     elif self.progress % self.items_per_batch == 0:
@@ -31,4 +32,5 @@ class Progress:
     return self.progress >= self.total
 
   def is_batch_complete(self):
-    return self.finished() or self.progress % self.items_per_batch == 0
+    return (self.current_batch == self.batches 
+      or self.progress % self.items_per_batch == 0)
