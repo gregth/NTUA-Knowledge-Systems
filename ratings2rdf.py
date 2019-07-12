@@ -11,7 +11,7 @@ from utils import is_specified, uri_base
 
 identifier = 'ratingsGraph'
 filename = 'data/title.ratings.tsv'
-batches = 10
+batches = 100
 
 # Create graph
 g = Graph(identifier=identifier)
@@ -19,7 +19,6 @@ n = Namespace(uri_base)
 
 # Count lines
 total_entries = num_lines = sum(1 for line in open(filename))
-total_entries = 104
 
 progress = Progress(total_entries, batches)
 start = time.time()
@@ -42,7 +41,6 @@ with open(filename) as fd:
     if progress.is_batch_complete(): 
       output = 'outs/' + identifier + str(total_entries) + 'b' + '{num:0{width}}'.format(num=progress.current_batch, width=4) + '.ttl.n3'
       g.serialize(destination=output, format='turtle')
-
       g.close()
       g = Graph(identifier=identifier)
 
