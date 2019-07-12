@@ -20,8 +20,7 @@ n = Namespace(uri_base)
 genre_namespace = Namespace(uri_base + 'Genre/')
 
 # Count lines
-total_entries = num_lines = sum(1 for line in open(filename))
-total_entries = 115
+total_entries = num_lines = sum(1 for line in open(filename)) - 1
 
 progress = Progress(total_entries, batches)
 start = time.time()

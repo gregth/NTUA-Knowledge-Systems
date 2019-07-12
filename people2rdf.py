@@ -17,8 +17,8 @@ batches = 10
 g = Graph(identifier=identifier)
 n = Namespace(uri_base)
 
-# Count lines
-total_entries = num_lines = sum(1 for line in open(filename))
+# Count lines, don't forget to remove header
+total_entries = num_lines = sum(1 for line in open(filename)) - 1
 
 progress = Progress(total_entries, batches)
 start = time.time()

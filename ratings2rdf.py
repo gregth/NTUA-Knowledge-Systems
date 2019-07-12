@@ -17,8 +17,8 @@ batches = 100
 g = Graph(identifier=identifier)
 n = Namespace(uri_base)
 
-# Count lines
-total_entries = num_lines = sum(1 for line in open(filename))
+# Count lines, don't forget to remove header
+total_entries = num_lines = sum(1 for line in open(filename)) - 1
 
 progress = Progress(total_entries, batches)
 start = time.time()
@@ -38,14 +38,17 @@ with open(filename) as fd:
     progress.count()
 
     # Time to write the current batch and clear the graph
-    if progress.is_batch_complete(): 
+    if progress.is_batch_complete():
       output = 'outs/' + identifier + str(total_entries) + 'b' + '{num:0{width}}'.format(num=progress.current_batch, width=4) + '.ttl.n3'
       g.serialize(destination=output, format='turtle')
       g.close()
       g = Graph(identifier=identifier)
 
-    if progress.finished():
-      break
+
+    output = 'outs/' + identifier + str(total_entries) + 'b' + '{num:0{width}}'.format(num=progress.current_batch, width=4) + '.ttl.n3'
+    g.serialize(destination=output, format='turtle')
+    g.close()
+    g = Graph(identifier=identifier)
 
 print("Total Items Processed: ", progress.total)
 end = time.time()
