@@ -69,7 +69,7 @@ with open(filename) as fd:
 
     # Time to write the current batch and clear the graph
     if progress.is_batch_complete(): 
-      output = 'outs/' + identifier + str(total_entries) + 'b' + str(progress.current_batch) + '.ttl.n3'
+      output = 'outs/' + identifier + str(total_entries) + 'b' + '{num:0{width}}'.format(num=progress.current_batch, width=4) + '.ttl.n3'
       # print('Serializing batch #', progress.current_batch)
       # print('Count #', progress.progress)
       g.serialize(destination=output, format='turtle')
