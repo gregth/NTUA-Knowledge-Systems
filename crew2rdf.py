@@ -2,7 +2,7 @@ from rdflib.graph import ConjunctiveGraph as Graph
 from rdflib.store import Store
 from rdflib.plugin import get as plugin
 from rdflib.term import URIRef
-from rdflib import OWL, RDFS, Literal, Namespace 
+from rdflib import OWL, RDFS, Literal, Namespace
 from rdflib.namespace import FOAF, RDF, XSD
 import csv, os, time, shutil
 from progress import Progress
@@ -18,7 +18,6 @@ n = Namespace(uri_base)
 
 # Count lines
 total_entries = num_lines = sum(1 for line in open(filename)) - 1
-total_entries = 34343
 
 progress = Progress(total_entries, batches)
 start = time.time()
@@ -46,7 +45,7 @@ with open(filename) as fd:
 
     progress.count()
 
-    if progress.is_batch_complete(): 
+    if progress.is_batch_complete():
       output = 'outs/' + identifier + str(total_entries) + 'b' + '{num:0{width}}'.format(num=progress.current_batch, width=4) + '.ttl.n3'
       g.serialize(destination=output, format='turtle')
       g.close()
@@ -54,7 +53,7 @@ with open(filename) as fd:
 
     if progress.finished():
       break
-    
+
 print("Total Items Processed: ", progress.total)
 end = time.time()
 print("Total Time: ", end - start)
