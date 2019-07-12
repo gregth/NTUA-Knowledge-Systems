@@ -4,12 +4,15 @@
      xmlns:mo="http://www.image.ntua.gr/stg/mo/"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:www="http://www.ourmoviedb.org/"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:ourmoviedb="http://ourmoviedb.org/">
     <owl:Ontology rdf:about="http://www.ourmoviedb.org/">
         <owl:versionIRI rdf:resource="http://www.ourmoviedb.org/1.0"/>
+        <owl:imports rdf:resource="file:/home/gregth/workspace/knowledge_sys/code/final_out/genres/genres5990773.ttl.n3"/>
+        <owl:imports rdf:resource="file:/home/gregth/workspace/knowledge_sys/code/final_out/years/yearsGraph.ttl.n3"/>
     </owl:Ontology>
     
 
