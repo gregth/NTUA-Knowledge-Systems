@@ -16,26 +16,18 @@ def is_specified(val):
 identifier = 'ratingsGraph'
 uri_base = 'http://www.ourmoviedb.org/'
 filename = 'data/title.ratings.tsv'
-delete_existing_persistent_graph=True
+batches = 10
 
 # Create graph
-g = Graph(store='Sleepycat', identifier=identifier)
-store_dir = 'stores/Store_' + identifier
-
-if delete_existing_persistent_graph and os.path.exists(store_dir):
-  shutil.rmtree(store_dir)
-g.open(store_dir,  create=True)
-
+g = Graph(identifier=identifier)
 n = Namespace(uri_base)
 
 # Count lines
 total_entries = num_lines = sum(1 for line in open(filename))
-output = 'outs/' + identifier + str(total_entries) + '.ttl.n3'
+total_entries = 104
 
-progress = Progress(total_entries)
+progress = Progress(total_entries, batches)
 start = time.time()
-
-
 with open(filename) as fd:
   data = csv.DictReader(fd, delimiter="\t", quotechar='"', escapechar='')
   other_roles = set()
@@ -50,10 +42,19 @@ with open(filename) as fd:
     g.add((film_node, n.votesNumber, Literal(votes, datatype=XSD.int)))
 
     progress.count()
+
+    # Time to write the current batch and clear the graph
+    if progress.is_batch_complete(): 
+      output = 'outs/' + identifier + str(total_entries) + 'b' + '{num:0{width}}'.format(num=progress.current_batch, width=4) + '.ttl.n3'
+      g.serialize(destination=output, format='turtle')
+
+      g.close()
+      g = Graph(identifier=identifier)
+
     if progress.finished():
       break
 
-g.serialize(destination=output, format='turtle')
+print("Total Items Processed: ", progress.total)
 end = time.time()
 print("Total Time: ", end - start)
 g.close()
