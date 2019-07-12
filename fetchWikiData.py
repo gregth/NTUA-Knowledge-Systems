@@ -50,33 +50,4 @@ with open(out_file, 'wt') as out_file:
     print("Sleeping 60 seconds to avoid too many requests error...")
     time.sleep(60)
 
-print('Total results: ', total_results)
-
-"""
-total_entries = len(total_results) 
-progress = Progress(total_entries)
-start = time.time()
-
-n = Namespace(uri_base)
-
-for r in total_entries:
-  raw_id = r['id']['value']
-  match = re.match(r"^(tt)*(?P<id>\d{7,10}).*", raw_id)
-  if not match:
-    wrongs += 1
-    continue
-  imdb_id = match.group(2)
-  film_node = n['Movie/tt' + imdb_id]
-
-  # Create a node for dbpedia
-  uri = r['film']['value']
-  dbp_node = URIRef(uri)
-  g.add((film_node, n.hasWikiNode, dbp_node))
-  progress.count()
-    
-print("Not valid IMDB ids: ", wrongs)
-g.serialize(destination=output, format='turtle')
-end = time.time()
-print("Total Time: ", end - start)
-g.close()
-"""
+print('Total results fetched: ', total_results)
