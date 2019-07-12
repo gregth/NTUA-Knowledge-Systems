@@ -6,41 +6,25 @@ from rdflib import OWL, RDFS, Literal, Namespace
 from rdflib.namespace import FOAF, RDF, XSD
 import csv, os, time, shutil
 from progress import Progress
-
-
-def is_specified(val):
-  unspecified_indicators = ['\\N']
-  return val not in unspecified_indicators
-
+from utils import is_specified, uri_base
 
 identifier = 'crewGraph'
-uri_base = 'http://www.ourmoviedb.org/'
 filename = 'data/title.crew.tsv'
-output = 'outs/' + identifier + '.ttl.n3'
-delete_existing_persistent_graph=True
+batches = 100
 
 # Create graph
-g = Graph(store='Sleepycat', identifier=identifier)
-store_dir = 'stores/Store_' + identifier
-
-if delete_existing_persistent_graph and os.path.exists(store_dir):
-  shutil.rmtree(store_dir)
-g.open(store_dir,  create=True)
-
+g = Graph(identifier=identifier)
 n = Namespace(uri_base)
 
 # Count lines
-total_entries = num_lines = sum(1 for line in open(filename))
-total_entries = round(total_entries/200) # Test
+total_entries = num_lines = sum(1 for line in open(filename)) - 1
+total_entries = 34343
 
-progress = Progress(total_entries)
+progress = Progress(total_entries, batches)
 start = time.time()
-
-
 with open(filename) as fd:
   data = csv.DictReader(fd, delimiter="\t", quotechar='"', escapechar='')
   other_roles = set()
-
   for row in data:
     film_node = n['Movie/' + row['tconst']]
 
@@ -61,10 +45,17 @@ with open(filename) as fd:
         g.add((film_node, n.hasDirector, director_node))
 
     progress.count()
+
+    if progress.is_batch_complete(): 
+      output = 'outs/' + identifier + str(total_entries) + 'b' + '{num:0{width}}'.format(num=progress.current_batch, width=4) + '.ttl.n3'
+      g.serialize(destination=output, format='turtle')
+      g.close()
+      g = Graph(identifier=identifier)
+
     if progress.finished():
       break
     
-g.serialize(destination=output, format='turtle')
+print("Total Items Processed: ", progress.total)
 end = time.time()
 print("Total Time: ", end - start)
 g.close()
