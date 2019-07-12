@@ -25,6 +25,7 @@ start = time.time()
 with open(filename) as fd:
   data = csv.DictReader(fd, delimiter="\t", quotechar='"', escapechar='')
   other_roles = set()
+    # Define correspodencies between input data and property names
   correspodencies = {
     'actor' : 'hasActor',
     'actress' : 'hasActor',
@@ -40,13 +41,10 @@ with open(filename) as fd:
     'archive_sound' : 'archive_sound_by',
   }
   for row in data:
+
     film_node = n['Movie/' + row['tconst']]
     person_node = n['Person/' + row['nconst']]
-
     role = row['category']
-    # Define correspodencies between input data and property names
-
-
     if role in correspodencies:
       g.add((film_node, n[correspodencies[role]], person_node))
     else:
@@ -56,11 +54,7 @@ with open(filename) as fd:
     # Time to write the current batch and clear the graph
     if progress.is_batch_complete(): 
       output = 'outs/' + identifier + str(total_entries) + 'b' + '{num:0{width}}'.format(num=progress.current_batch, width=4) + '.ttl.n3'
-      # print('Serializing batch #', progress.current_batch)
-      # print('Count #', progress.progress)
       g.serialize(destination=output, format='turtle')
-
-      # Create graph
       g.close()
       g = Graph(identifier=identifier)
 

@@ -11,7 +11,7 @@ from utils import is_specified, uri_base
 
 identifier = 'peopleGraph'
 filename = 'data/name.basics.tsv'
-batches = 10
+batches = 100
 
 # Create graph
 g = Graph(identifier=identifier)
