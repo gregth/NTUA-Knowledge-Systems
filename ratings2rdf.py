@@ -44,12 +44,6 @@ with open(filename) as fd:
       g.close()
       g = Graph(identifier=identifier)
 
-
-    output = 'outs/' + identifier + str(total_entries) + 'b' + '{num:0{width}}'.format(num=progress.current_batch, width=4) + '.ttl.n3'
-    g.serialize(destination=output, format='turtle')
-    g.close()
-    g = Graph(identifier=identifier)
-
 print("Total Items Processed: ", progress.total)
 end = time.time()
 print("Total Time: ", end - start)
