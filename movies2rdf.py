@@ -16,23 +16,19 @@ identifier = 'moviesGraph'
 uri_base = 'http://www.ourmoviedb.org/'
 filename = 'data/title.basics.tsv'
 delete_existing_persistent_graph=True
+batches = 10
 
 # Create graph
-g = Graph(store='Sleepycat', identifier=identifier)
-store_dir = 'stores/Store_' + identifier
-if delete_existing_persistent_graph and os.path.exists(store_dir):
-  shutil.rmtree(store_dir)
-g.open(store_dir,  create=True)
+g = Graph(identifier=identifier)
 
 n = Namespace(uri_base)
 genre_namespace = Namespace(uri_base + 'Genre/')
 
 # Count lines
 total_entries = num_lines = sum(1 for line in open(filename))
-total_entries = 10000
-output = 'outs/' + identifier + str(total_entries) + '.ttl.n3'
+total_entries = 115
 
-progress = Progress(total_entries)
+progress = Progress(total_entries, batches)
 start = time.time()
 with open(filename) as fd:
   genres_set = set()
@@ -67,22 +63,38 @@ with open(filename) as fd:
         g.add((movie_node, n.hasGenre, genre_node))
         genres_set.add(genre)
 
-    # Produce rdf statements for the genres we accumulated
-    if len(genres_set):
-      for genre in genres_set:
-        genre_node = genre_namespace[genre] 
-        g.add((genre_node, n.hasGenreName, Literal(genre)))
-        g.add((genre_node, RDF.type, n.Genre)) 
 
 
     progress.count()
+
+    # Time to write the current batch and clear the graph
+    if progress.is_batch_complete(): 
+      output = 'outs/' + identifier + str(total_entries) + 'b' + str(progress.current_batch) + '.ttl.n3'
+      # print('Serializing batch #', progress.current_batch)
+      # print('Count #', progress.progress)
+      g.serialize(destination=output, format='turtle')
+
+      # Create graph
+      g.close()
+      g = Graph(identifier=identifier)
+
     if progress.finished():
       break
 
+  print("Total Items Processed: ", progress.total)
+  print('Total genres found: ', len(genres_set))
 
-print(len(genres_set))
+  # Produce rdf statements for the genres we accumulated
+  genresGraph = Graph(identifier=identifier)
+  if len(genres_set):
+    for genre in genres_set:
+      genre_node = genre_namespace[genre] 
+      genresGraph.add((genre_node, n.hasGenreName, Literal(genre)))
+      genresGraph.add((genre_node, RDF.type, n.Genre)) 
+    output = 'outs/' + 'genres' + str(total_entries) + '.ttl.n3'
+    genresGraph.serialize(destination=output, format='turtle')
+    print('Serializing Genres Graph...')
 
-g.serialize(destination=output, format='turtle')
 end = time.time()
 print("Total Time: ", end - start)
 g.close()
