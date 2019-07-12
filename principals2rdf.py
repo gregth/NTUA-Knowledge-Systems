@@ -6,14 +6,10 @@ from rdflib import OWL, RDFS, Literal, Namespace
 from rdflib.namespace import FOAF, RDF, XSD
 import csv, os, time, shutil
 from progress import Progress
-
-def is_specified(val):
-  unspecified_indicators = ['\\N']
-  return val not in unspecified_indicators and not None
+from utils import uri_base, is_specified
 
 
 identifier = 'principalsGraph'
-uri_base = 'http://www.ourmoviedb.org/'
 filename = 'data/title.principals.tsv'
 batches = 100
 

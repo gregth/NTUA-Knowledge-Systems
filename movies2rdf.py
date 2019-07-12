@@ -6,16 +6,11 @@ from rdflib import OWL, RDFS, Literal, Namespace
 from rdflib.namespace import FOAF, RDF, XSD
 import csv, os, time, shutil
 from progress import Progress
-
-def is_specified(val):
-  unspecified_indicators = ['\\N']
-  return val not in unspecified_indicators and not None
+from utils import is_specified, uri_base
 
 
 identifier = 'moviesGraph'
-uri_base = 'http://www.ourmoviedb.org/'
 filename = 'data/title.basics.tsv'
-delete_existing_persistent_graph=True
 batches = 10
 
 # Create graph
@@ -63,8 +58,6 @@ with open(filename) as fd:
         g.add((movie_node, n.hasGenre, genre_node))
         genres_set.add(genre)
 
-
-
     progress.count()
 
     # Time to write the current batch and clear the graph
@@ -74,7 +67,6 @@ with open(filename) as fd:
       # print('Count #', progress.progress)
       g.serialize(destination=output, format='turtle')
 
-      # Create graph
       g.close()
       g = Graph(identifier=identifier)
 
