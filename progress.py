@@ -5,7 +5,7 @@ import math
 class Progress:
   def __init__(self, total, batches=1):
     self.progress = 0
-    self.current_batch = 1
+    self.current_batch = 0
     self.total = total
     self.batches = batches # Process data in batches to avoid crashings
     self.items_per_batch = math.ceil(float(total) / float(batches))
@@ -21,6 +21,7 @@ class Progress:
       self.current_batch += 1
       self.bbar.update(1)
     if self.finished():
+      self.current_batch += 1 # Create the last batch
       self.pbar.close()
       self.bbar.close()
 
@@ -28,5 +29,4 @@ class Progress:
     return self.progress >= self.total
 
   def is_batch_complete(self):
-    return (self.current_batch == self.batches and self.finished() or
-      self.progress % self.items_per_batch == 0)
+    return self.finished() or self.progress % self.items_per_batch == 0
