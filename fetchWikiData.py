@@ -3,7 +3,7 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 import re
 import time
 
-def get_movies_from_dbpedia(limit, offset):
+def get_movies_from_wikidata(limit, offset):
   e = 'https://query.wikidata.org/bigdata/ldf'
   i = "https://query.wikidata.org/sparql"
   wikidata = SPARQLWrapper(i)
@@ -34,7 +34,7 @@ with open(out_file, 'wt') as out_file:
   total_results = 0
   while True:
     print("Requesting batch no: ", batch)
-    results = get_movies_from_dbpedia(limit, offset)
+    results = get_movies_from_wikidata(limit, offset)
     print('Offset: ', offset)
     print("Received results count: " + str(len(results)))
     if not len(results):
