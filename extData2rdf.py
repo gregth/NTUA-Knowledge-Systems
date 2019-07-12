@@ -1,16 +1,23 @@
+# !/bin/python3
 from rdflib.graph import ConjunctiveGraph as Graph
 from rdflib.store import Store
 from rdflib.plugin import get as plugin
 from rdflib.term import URIRef
 from rdflib import OWL, RDFS, Literal, Namespace 
 from rdflib.namespace import FOAF, RDF, XSD
-import csv, os, time, shutil
+import csv, os, time, shutil, sys
 from progress import Progress
 from utils import is_specified, uri_base
 import re
 
-identifier = 'wikiGraph'
-filename = 'data/wikiFetchTitles.tsv'
+# identifier = 'wikiGraph'
+# filename = 'data/wikiFetchTitles.tsv'
+
+if len(sys.argv) != 4:
+  sys.exit('Usage: ./wikidata2rdf.py <inputData.tsv> <outputRDF.n3> <source:db|wiki>')
+filename = identifier = str(sys.argv[1])
+outfile = str(sys.argv[2])
+source = str(sys.argv[3])
 
 # Create graph
 g = Graph(identifier=identifier)
@@ -40,17 +47,16 @@ with open(filename) as fd:
     # Create a node for dbpedia
     uri = r['uri']
     wiki_node = URIRef(uri)
-    g.add((film_node, n.hasWikiNode, wiki_node))
+    g.add((film_node, n['has' + source + 'Node'], wiki_node))
 
     progress.count()
     if progress.finished():
       break
     
-output = 'outs/' + identifier + str(total_entries) + '.ttl.n3'
-g.serialize(destination=output, format='turtle')
+g.serialize(destination=outfile, format='turtle')
 end = time.time()
 
-print('Wrong found: ', len(wrongs))
+print('Wrong formatted IMDB IDs found: ', len(wrongs))
 print(wrongs)
 print("Total Items Processed: ", progress.total)
 print("Total Time: ", end - start)
